@@ -1,0 +1,17 @@
+<!--
+  This template loads for the 'tab.state-detail' state (app.js)
+  'state' is a $scope variable created in the StatesCtrl controller (controllers.js)
+  The StatesCtrl pulls data from the States service (service.js)
+  The States service returns an array of state data
+-->
+<ion-view view-title="{{state.name}}">
+  <ion-content class="padding">
+    <img ng-src="{{state.map}}" style="width: 64px; height: 64px">
+    <p>
+      {{state.capital}}
+    </p>
+    <p>
+      {{state.nickName}}
+    </p>
+  </ion-content>
+</ion-view>
