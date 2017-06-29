@@ -6,25 +6,41 @@
       The app is being build as a high-fidelity prototype for of an interactive educational mobile app for kids to learn geography.
     </p>
 
+    <button ion-button class="button-assertive" ng-click="GetGeoLocationState()">
+      Test Geo Location
+    </button>
+
     <p>
       Your current Position Based on Geo Location
     </p>
 
-    <p>
+    <h2 ng-if="latitude">
       Latitude:
-    </p>
+    </h2>
 
-    <p>
+    <h2>
       {{latitude}}
-    </p>
+    </h2>
 
-    <p>
+    <h2 ng-if="longitude">
       Longitude:
-    </p>
+    </h2>
 
-    <p>
+    <h2>
       {{longitude}}
-    </p>
+    </h2>
+
+    <button ion-button class="button-assertive" ng-click="GetGeoLocationState()">
+      Test Google Maps API
+    </button>
+
+    <h2>
+      Your Current Location:
+    </h2>
+
+    <h2>
+      {{currentLocation}}
+    </h2>
 
   </ion-content>
 </ion-view>

@@ -59,5 +59,3 @@ angular.module('colorMyStates.services', [])
   };
 })
 
-
-

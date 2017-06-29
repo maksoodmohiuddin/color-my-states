@@ -1,6 +1,6 @@
 angular.module('colorMyStates.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicLoading, GeoLocation) {
+.controller('DashCtrl', function($scope, $ionicLoading, $http, GeoLocation) {
 
   $scope.GetGeoLocation = function () {
 
@@ -19,6 +19,7 @@ angular.module('colorMyStates.controllers', [])
         $ionicLoading.hide();
         $scope.latitude = parseFloat(position.coords.latitude);
         $scope.longitude = parseFloat(position.coords.longitude);
+        $scope.GetGeoLocationState();
       },
         // failure
         function (reason) {
@@ -31,6 +32,33 @@ angular.module('colorMyStates.controllers', [])
       });
   };
 
+  $scope.GetGeoLocationState = function () {
+    // default to Seattle
+    if (!$scope.latitude && !$scope.longitude) {
+      $scope.latitude = 37.785834;
+      $scope.longitude = -122.406117;
+    }
+
+    //var googleMapsReverseGeocodingAPI = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyASXfyZ4bfzlrx9aPRa3Nupqiw4DnQBy8I';
+
+    var googleMapsReverseGeocodingAPI = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + $scope.latitude + ',' + $scope.longitude + '&key=AIzaSyASXfyZ4bfzlrx9aPRa3Nupqiw4DnQBy8I';
+
+    $http.get(googleMapsReverseGeocodingAPI)
+      .success(function (response) {
+        var location = response.results[0].formatted_address;
+        console.log("Your Current Location is : " + location);
+        $scope.currentLocation = location;
+      })
+      .error(function (data, status, headers, config) {
+
+        if (status == 0)
+          console.log("Error", "Error occured from calling Google Maps API");
+        else
+          console.log("Error", data);
+      });
+  };
+
+  // init call
   $scope.GetGeoLocation();
 
 })
