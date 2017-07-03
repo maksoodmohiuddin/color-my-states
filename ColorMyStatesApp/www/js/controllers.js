@@ -1,6 +1,6 @@
 angular.module('colorMyStates.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicLoading, $http, GeoLocation) {
+.controller('DashCtrl', function($scope, $ionicLoading, $http, $state, GeoLocation) {
 
   $scope.GetGeoLocation = function () {
 
@@ -47,6 +47,8 @@ angular.module('colorMyStates.controllers', [])
       .success(function (response) {
         var location = response.results[0].formatted_address;
         console.log("Your Current Location is : " + location);
+        // for low-fidelity prototype:
+        location = "California";
         $scope.currentLocation = location;
       })
       .error(function (data, status, headers, config) {
@@ -56,6 +58,14 @@ angular.module('colorMyStates.controllers', [])
         else
           console.log("Error", data);
       });
+  };
+
+  $scope.settings = {
+    disableGeolocation: false
+  };
+
+  $scope.ColorYourState = function(){
+    $state.go('tab.color');
   };
 
   // init call
@@ -79,8 +89,6 @@ angular.module('colorMyStates.controllers', [])
   $scope.state = States.get($stateParams.stateId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    disableGeolocation: false
-  };
+.controller('ColorCtrl', function($scope, $stateParams, States) {
+  $scope.state = States.get(5);
 });

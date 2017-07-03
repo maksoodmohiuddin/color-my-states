@@ -6,12 +6,34 @@
 -->
 <ion-view view-title="{{state.name}}">
   <ion-content class="padding">
+    <img ng-src="{{state.map}}" style="width: 100px; height: 100px">
     <p> Capital:
       {{state.capital}}
     </p>
     <p> Nick Name:
       {{state.nickName}}
     </p>
-    <img ng-src="{{state.map}}" style="width: 268px; height: 268px">
+
+    <p> State Flower:
+      {{state.stateFlower}}
+    </p>
+
+    <p> State Bird:
+      {{state.stateBird}}
+    </p>
+
+    <p> Border States:
+      {{state.borderState}}
+    </p>
+
+    <p> Highest Point:
+      {{state.highestPoint}}
+    </p>
+
+    <p>
+      <ion-toggle  ng-model="state.visited">
+        Visited
+      </ion-toggle>
+    </p>
   </ion-content>
 </ion-view>

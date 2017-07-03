@@ -69,12 +69,12 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.color', {
+    url: '/color',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-color': {
+        templateUrl: 'templates/tab-color.html',
+        controller: 'ColorCtrl'
       }
     }
   });
