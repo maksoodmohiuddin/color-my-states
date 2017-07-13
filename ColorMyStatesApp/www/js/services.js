@@ -13,7 +13,6 @@ angular.module('colorMyStates.services', [])
     borderState: 'Florida, Georgia, Mississippi and Tennessee ',
     highestPoint: 'Cheaha Mountain - 2,407 feet!',
     visited: false,
-    colored: false,
     map: 'img/alabama.gif'
   }, {
     id: 2,
@@ -21,7 +20,6 @@ angular.module('colorMyStates.services', [])
     capital: 'Juneau',
     nickName: 'The Last Frontier',
     visited: false,
-    colored: false,
     map: 'img/alaska.gif'
   }, {
     id: 3,
@@ -29,7 +27,6 @@ angular.module('colorMyStates.services', [])
     capital: 'Phoenix',
     nickName: 'The Grand Canyon State',
     visited: false,
-    colored: false,
     map: 'img/arizona.gif'
   },{
     id: 4,
@@ -37,7 +34,6 @@ angular.module('colorMyStates.services', [])
     capital: 'Little Rock',
     nickName: 'The Natural State',
     visited: false,
-    colored: false,
     map: 'img/arkansas.gif'
   },{
     id: 5,
@@ -417,6 +413,17 @@ angular.module('colorMyStates.services', [])
     all: function() {
       return states;
     },
+    visited: function() {
+      var visitedKeys = localStorage.getItem('visited');
+      var statesVisited = [];
+      for (var i = 0; i < states.length; i++) {
+        if (visitedKeys.indexOf(states[i].id) > -1) {
+          states[i].visited = true;
+          statesVisited.push(states[i]);
+        }
+      }
+      return statesVisited;
+    },
     get: function(stateId) {
       for (var i = 0; i < states.length; i++) {
         if (states[i].id === parseInt(stateId)) {
@@ -449,3 +456,16 @@ angular.module('colorMyStates.services', [])
   };
 })
 
+.factory('SessionService',['$http',function($http){
+  return {
+    set:function(key,value){
+      return localStorage.setItem(key,JSON.stringify(value));
+    },
+    get:function(key){
+      return JSON.parse(localStorage.getItem(key));
+    },
+    destroy:function(key){
+      return localStorage.removeItem(key);
+    },
+  };
+}])

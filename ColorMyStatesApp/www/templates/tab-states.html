@@ -1,7 +1,7 @@
-<ion-view view-title="States">
+<ion-view view-title="Click on the state to know more about it">
   <ion-content>
       <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="state in states" type="item-text-wrap" href="#/tab/states/{{state.id}}">
+        <ion-item class="item-remove-animate item-avatar item-icon-right classA" ng-repeat="state in states" type="item-text-wrap" href="#/tab/states/{{state.id}}">
           <img ng-src="{{state.map}}">
           <h2>{{state.name}}</h2>
           <p>{{state.nickName}}</p>
@@ -10,3 +10,4 @@
       </ion-list>
   </ion-content>
 </ion-view>
+

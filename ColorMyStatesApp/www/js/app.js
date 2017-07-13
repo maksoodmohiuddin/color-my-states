@@ -80,6 +80,6 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/color');
 
 });

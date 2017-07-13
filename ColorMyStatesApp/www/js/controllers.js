@@ -1,13 +1,20 @@
 angular.module('colorMyStates.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicLoading, $http, $state, GeoLocation) {
+.controller('ColorCtrl', function($scope, $ionicLoading, $http, $state, States, GeoLocation, SessionService) {
+
+  $scope.GetRandomState = function () {
+    $scope.selectedState = Math.floor(Math.random() * (50-1 + 1) + 1);
+  };
 
   $scope.GetGeoLocation = function () {
 
-    console.log('Tracing current location...');
-    $ionicLoading.show({
-      template: 'Tracing current location...'
-    });
+
+    //SessionService.destroy('visited');
+
+    //console.log('Tracing current location...');
+    //$ionicLoading.show({
+    //  template: 'Tracing current location...'
+    //});
     GeoLocation.getCurrentPosition()
       .then(
         // success
@@ -24,11 +31,23 @@ angular.module('colorMyStates.controllers', [])
         // failure
         function (reason) {
           console.log('Cannot obtain current location', reason);
+          $scope.GetRandomState();
+          $scope.state = States.get($scope.selectedState);
 
-        $ionicLoading.show({
-          template: 'Cannot obtain current location',
-          duration: 1500
-        });
+          if ( SessionService.get('visited') === null) {
+              var visitedStatesNew = [];
+              visitedStatesNew.push($scope.state.id);
+              SessionService.set('visited', visitedStatesNew);
+          } else {
+            var visitedStates = SessionService.get('visited');
+            visitedStates.push($scope.state.id);
+            SessionService.set('visited', visitedStates);
+          }
+
+        //$ionicLoading.show({
+        //  template: 'Cannot obtain current location',
+        //  duration: 1500
+        //});
       });
   };
 
@@ -60,14 +79,6 @@ angular.module('colorMyStates.controllers', [])
       });
   };
 
-  $scope.settings = {
-    disableGeolocation: false
-  };
-
-  $scope.ColorYourState = function(){
-    $state.go('tab.color');
-  };
-
   // init call
   $scope.GetGeoLocation();
 
@@ -89,6 +100,9 @@ angular.module('colorMyStates.controllers', [])
   $scope.state = States.get($stateParams.stateId);
 })
 
-.controller('ColorCtrl', function($scope, $stateParams, States) {
-  $scope.state = States.get(5);
+.controller('DashCtrl', function($scope, $stateParams, States, SessionService) {
+  var visited = SessionService.get('visited');
+  alert(visited);
+  $scope.visitedStates = States.visited();
+  //$scope.state = States.get(5);
 });
