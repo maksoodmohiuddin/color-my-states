@@ -77,6 +77,16 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
         controller: 'ColorCtrl'
       }
     }
+  })
+
+  .state('tab.about', {
+    url: '/about',
+    views: {
+      'tab-about': {
+        templateUrl: 'templates/tab-about.html',
+        controller: 'AboutCtrl'
+      }
+    }
   });
 
   // if none of the above states are matched, use this as the fallback
