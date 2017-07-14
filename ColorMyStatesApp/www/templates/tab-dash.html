@@ -1,11 +1,8 @@
-<ion-view view-title="States Stamped">
+<ion-view view-title="States Colored">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="state in visitedStates" type="item-text-wrap" href="#/tab/states/{{state.id}}">
-        <img ng-src="{{state.map}}">
-        <h2>{{state.name}}</h2>
-        <p>{{state.nickName}}</p>
-        <i class="icon ion-chevron-right icon-accessory"></i>
+      <ion-item ng-repeat="state in visitedStates" type="item-text-wrap" >
+        <span>{{state.name}}</span>
       </ion-item>
     </ion-list>
   </ion-content>

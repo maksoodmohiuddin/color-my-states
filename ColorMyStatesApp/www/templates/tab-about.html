@@ -1,15 +1,14 @@
 
 <ion-view view-title="{{state.name}}">
-  <ion-content scroll="false">
-    <canvas id="c"></canvas>
-  </ion-content>
+  <ion-content class="padding">
+    <h3>
+      Howdy Ranger! Welcome to  {{state.name}}
+    </h3>
 
-  <ion-footer-bar class="bar-stable">
-    <div class="title">
-      <button class="button button-clear" style="color: {{brushcolor}}" ng-click="addText()">Aa</button>
-      <button class="button button-icon ion-paintbrush" ng-click="drawingMode()"></button>
-      <button class="button button-icon ion-android-color-palette" style="color: {{brushcolor}}" ng-if="showColorPaletteIcon" ng-click="openColorsPopover($event)"></button>
-      <button class="button button-icon ion-ios-undo" ng-click="undoLastObject()"></button>
-    </div>
-  </ion-footer-bar>
+    <img ng-src="{{state.map}}" style="width: 268px; height: 268px">
+  </ion-content>
 </ion-view>
+
+
+
+
