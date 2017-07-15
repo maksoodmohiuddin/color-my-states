@@ -1,0 +1,17 @@
+<ion-view view-title="States Trekked">
+  <ion-content>
+    <div class="card">
+      <div class="item item-text-wrap item-divider">
+        {{visitedStatedName}}
+      </div>
+      <div class="item item-text-wrap">
+        <img ng-src="img/usa.jpg" style="width: 268px; height: 268px">
+      </div>
+      <div class="item item-divider">
+        <button class="button button-icon ion-location" ng-click="GetGeoLocation()"> Where Am I Now?</button>
+        <button class="button button-icon ion-ios-trash" ng-click="ClearTrek()"> Clear Trekked</button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+

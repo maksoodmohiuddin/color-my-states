@@ -40,12 +40,12 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.color', {
+    url: '/color',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-color': {
+        templateUrl: 'templates/tab-color.html',
+        controller: 'ColorCtrl'
       }
     }
   })
@@ -69,22 +69,12 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
       }
     })
 
-  .state('tab.color', {
-    url: '/color',
+  .state('tab.trek', {
+    url: '/trek',
     views: {
-      'tab-color': {
-        templateUrl: 'templates/tab-color.html',
-        controller: 'ColorCtrl'
-      }
-    }
-  })
-
-  .state('tab.about', {
-    url: '/about',
-    views: {
-      'tab-about': {
-        templateUrl: 'templates/tab-about.html',
-        controller: 'AboutCtrl'
+      'tab-trek': {
+        templateUrl: 'templates/tab-trek.html',
+        controller: 'TrekCtrl'
       }
     }
   });
