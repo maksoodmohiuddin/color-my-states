@@ -2,10 +2,8 @@ angular.module('colorMyStates.controllers', [])
 
 .controller('ColorCtrl', function($scope, $ionicLoading, $http, $state, $ionicPopover, $ionicPopup, States, SessionService) {
 
-  //var width = window.innerWidth; // width of canvas
-  //var height = width * (4 / 3) // height of canvas
-  var width = 268;
-  var height = 268;
+  var width = window.innerWidth; // width of canvas
+  var height = width * (4 / 3) // height of canvas
 
   var canvas = new fabric.Canvas('c');
 
@@ -22,8 +20,7 @@ angular.module('colorMyStates.controllers', [])
 
   canvas.isDrawingMode = false;
   canvas.freeDrawingBrush.width = 7; // size of the drawing brush
-  $scope.brushcolor = 'rgba(255, 0, 0, 0.5)'; // set brushcolor to black to begin
-  //canvas.freeDrawingBrush.color = '#c0392b';
+  $scope.brushcolor = 'rgba(255, 0, 0, 0.5)'; // set brushcolor to red to begin
   canvas.freeDrawingBrush.color = 'rgba(255, 0, 0, 0.5)';
 
   var randomState = Math.floor(Math.random() * (50-1 + 1) + 1);
@@ -41,8 +38,8 @@ angular.module('colorMyStates.controllers', [])
   }
 
   canvas.setBackgroundImage($scope.state.map, canvas.renderAll.bind(canvas), {
-    height: width,
-    width: height
+    height: height,
+    width: width
   });
 
   // drawing mode
@@ -88,36 +85,7 @@ angular.module('colorMyStates.controllers', [])
     {color: "rgba(128, 128, 128, 0.5)"},
     {color: "rgba(255, 0, 0, 0.5)"},
     {color: "rgba(255, 0, 255, 0.5)"},
-  ]
-
-  // list of colors
-  $scope.colorsOld = [
-    {color: "#ecf0f1"},
-    {color: "#95a5a6"},
-    {color: "#bdc3c7"},
-    {color: "#7f8c8d"},
-    {color: "#000000"},
-    {color: "#F1A9A0"},
-    {color: "#D2527F"},
-    {color: "#f1c40f"},
-    {color: "#f39c12"},
-    {color: "#e67e22"},
-    {color: "#d35400"},
-    {color: "#e74c3c"},
-    {color: "#c0392b"},
-    {color: "#6D4C41"},
-    {color: "#3E2723"},
-    {color: "#1abc9c"},
-    {color: "#16a085"},
-    {color: "#2ecc71"},
-    {color: "#27ae60"},
-    {color: "#3498db"},
-    {color: "#2980b9"},
-    {color: "#34495e"},
-    {color: "#2c3e50"},
-    {color: "#9b59b6"},
-    {color: "#8e44ad"},
-  ]
+  ];
 
   $scope.changeBrushColor = function(color) {
     canvas.freeDrawingBrush.color = color;
