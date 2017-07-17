@@ -2,8 +2,10 @@ angular.module('colorMyStates.controllers', [])
 
 .controller('ColorCtrl', function($scope, $ionicLoading, $http, $state, $ionicPopover, $ionicPopup, States, SessionService) {
 
-  var width = window.innerWidth; // width of canvas
-  var height = width * (4 / 3) // height of canvas
+  //var width = window.innerWidth; // width of canvas
+  //var height = width * (4 / 3) // height of canvas
+  var width = 268;
+  var height = 268;
 
   var canvas = new fabric.Canvas('c');
 
@@ -19,8 +21,10 @@ angular.module('colorMyStates.controllers', [])
   canvas.height = height;
 
   canvas.isDrawingMode = false;
-  canvas.freeDrawingBrush.width = 24; // size of the drawing brush
-  $scope.brushcolor = '#c0392b'; // set brushcolor to black to begin
+  canvas.freeDrawingBrush.width = 7; // size of the drawing brush
+  $scope.brushcolor = 'rgba(255, 0, 0, 0.5)'; // set brushcolor to black to begin
+  //canvas.freeDrawingBrush.color = '#c0392b';
+  canvas.freeDrawingBrush.color = 'rgba(255, 0, 0, 0.5)';
 
   var randomState = Math.floor(Math.random() * (50-1 + 1) + 1);
   $scope.state = States.get(randomState);
@@ -37,8 +41,8 @@ angular.module('colorMyStates.controllers', [])
   }
 
   canvas.setBackgroundImage($scope.state.map, canvas.renderAll.bind(canvas), {
-    height: 680,
-    width: 680
+    height: width,
+    width: height
   });
 
   // drawing mode
@@ -72,6 +76,22 @@ angular.module('colorMyStates.controllers', [])
 
   // list of colors
   $scope.colors = [
+    {color: "rgba(0, 0, 128, 0.5)"},
+    {color: "rgba(0, 0, 255, 0.5)"},
+    {color: "rgba(0, 128, 0, 0.5)"},
+    {color: "rgba(0, 128, 128, 0.5)"},
+    {color: "rgba(0, 255, 0, 0.5)"},
+    {color: "rgba(0, 255, 255, 0.5)"},
+    {color: "rgba(128, 0, 0, 0.5)"},
+    {color: "rgba(128, 0, 128, 0.5)"},
+    {color: "rgba(128, 128, 0, 0.5)"},
+    {color: "rgba(128, 128, 128, 0.5)"},
+    {color: "rgba(255, 0, 0, 0.5)"},
+    {color: "rgba(255, 0, 255, 0.5)"},
+  ]
+
+  // list of colors
+  $scope.colorsOld = [
     {color: "#ecf0f1"},
     {color: "#95a5a6"},
     {color: "#bdc3c7"},
