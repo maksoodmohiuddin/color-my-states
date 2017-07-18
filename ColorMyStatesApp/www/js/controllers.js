@@ -91,7 +91,7 @@ angular.module('colorMyStates.controllers', [])
     canvas.freeDrawingBrush.color = color;
     $scope.brushcolor = color; // used to change the color palatte icon's color
     $scope.popover.hide(); // hide popover
-  }
+  };
 
   // undo last object, drawing or text
   $scope.undoLastObject = function() {
@@ -150,6 +150,16 @@ angular.module('colorMyStates.controllers', [])
     var drawing = canvas.toDataURL();
 
   }
+
+  $scope.playSoundTrack = function()
+  {
+    $scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
+    $scope.audio.loop = true;
+    $scope.audio.play();
+    $scope.pauseSoundTrack = false;
+  };
+
+  $scope.playSoundTrack();
 
 })
 
