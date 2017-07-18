@@ -10,6 +10,7 @@
       <button class="button button-icon ion-paintbrush" ng-click="drawingMode()"></button>
       <button class="button button-icon ion-android-color-palette" style="color: {{brushcolor}}" ng-if="showColorPaletteIcon" ng-click="openColorsPopover($event)"></button>
       <button class="button button-icon ion-ios-undo" ng-click="undoLastObject()"></button>
+      <button class="button button-icon ion-ios-arrow-forward" ng-show= 'showArrow' ng-click="closeColoring()"></button>
     </div>
   </ion-footer-bar>
 </ion-view>

@@ -7,28 +7,34 @@
 <ion-view view-title="{{state.name}}">
   <ion-content class="padding">
     <img ng-src="{{state.map}}" style="width: 100px; height: 100px">
-    <p> <strong> Capital: </strong> </p>
-      {{state.capital}}
-    </p>
-    <p> <strong> Nick Name: </strong>
-      {{state.nickName}}
+
+    <p>
+      <button class="button icon-right ion-bowtie button-calm" name="paw" ng-click="utterCapital()">Capital</button>
+      <div class="card" ng-show="showCapital">
+        <div class="item item-text-wrap">
+          {{state.capital}}
+        </div>
+      </div>
     </p>
 
-    <p> <strong> Statehood Date: </strong>
-      {{state.stateHood}}
+    <p>
+      <button class="button icon-right ion-bonfire button-energized" ng-click="utterNickName()">Nick Name</button>
+      <div class="card" ng-show="showNickName">
+        <div class="item item-text-wrap">
+          {{state.nickName}}
+        </div>
+      </div>
     </p>
 
-    <p> <strong> State Area: </strong>
-      {{state.stateArea}}
+    <p>
+      <button class="button icon-right ion-android-car button-royal" ng-click="utterBorderState()">Border States</button>
+      <div class="card" ng-show="showBorderState">
+        <div class="item item-text-wrap">
+          {{state.borderState}}
+        </div>
+      </div>
     </p>
 
-    <p> <strong> Border States: </strong>
-      {{state.borderState}}
-    </p>
-
-    <p> <strong> Highest Point: </strong>
-      {{state.highestPoint}}
-    </p>
 
   </ion-content>
 </ion-view>

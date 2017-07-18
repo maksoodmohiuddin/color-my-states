@@ -1,6 +1,6 @@
 angular.module('colorMyStates.controllers', [])
 
-.controller('ColorCtrl', function($scope, $ionicLoading, $http, $state, $ionicPopover, $ionicPopup, States, SessionService) {
+.controller('ColorCtrl', function($scope, $ionicLoading, $ionicPlatform, $http, $state, $ionicPopover, $ionicPopup, $timeout, States, SessionService) {
 
   var width = window.innerWidth; // width of canvas
   var height = width * (4 / 3) // height of canvas
@@ -151,19 +151,59 @@ angular.module('colorMyStates.controllers', [])
 
   }
 
-  $scope.playSoundTrack = function()
-  {
+
+  //$scope.playSoundTrack = function() {
+  //  $scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
+  //  $scope.audio.loop = true;
+  //  $scope.soundOn();
+  //};
+
+  $scope.closeColoring = function() {
+    $scope.soundOff();
+    $state.go("tab.state-detail", { "stateId": $scope.state.id});
+  };
+
+  $scope.soundOn = function () {
+    $scope.playSound = true;
     $scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
     $scope.audio.loop = true;
     $scope.audio.play();
-    $scope.pauseSoundTrack = false;
   };
 
-  $scope.playSoundTrack();
+  $scope.soundOff = function () {
+    $scope.playSound = false;
+    $scope.audio.pause();
+  };
+
+  $ionicPlatform.ready(function() {
+    // 5 seconds delay
+    $timeout( function(){
+      TTS.speak({
+          text: 'Howdy Ranger! Welcome to ' + $scope.state.name + '. Lets color it!',
+          locale: 'en-US',
+          rate: 1.3
+        },
+        function () {},
+        function (reason) {}
+      );
+    }, 2000 );
+
+  });
+
+  // 5 seconds delay
+  $timeout( function(){
+    $scope.soundOn();
+  }, 5000 );
+
+  $scope.showArrow = false;
+  // 5 seconds delay
+  $timeout( function(){
+    $scope.showArrow = true;
+  }, 60000 );
 
 })
 
-.controller('StatesCtrl', function($scope, States) {
+.controller('StatesCtrl', function($scope, $ionicPlatform, States) {
 // With the new view caching in Ionic, Controllers are only called
 // when they are recreated or on app start, instead of every page change.
 // To listen for when this page is active (for example, to refresh data),
@@ -175,8 +215,51 @@ angular.module('colorMyStates.controllers', [])
 $scope.states = States.all();
 })
 
-.controller('StateDetailCtrl', function($scope, $stateParams, States) {
+.controller('StateDetailCtrl', function($scope, $stateParams, $ionicPlatform, States) {
   $scope.state = States.get($stateParams.stateId);
+
+  $scope.utterCapital = function () {
+    $scope.showCapital = true;
+    $ionicPlatform.ready(function() {
+        TTS.speak({
+            text: 'Capital of ' + $scope.state.name + ' is ' + $scope.state.capital,
+            locale: 'en-US',
+            rate: 1.3
+          },
+          function () {},
+          function (reason) {}
+        )
+      })
+  };
+
+  $scope.utterNickName = function () {
+    $scope.showNickName = true;
+    $ionicPlatform.ready(function() {
+      TTS.speak({
+          text: $scope.state.name + ' also known as ' + $scope.state.nickName,
+          locale: 'en-US',
+          rate: 1.3
+        },
+        function () {},
+        function (reason) {}
+      )
+    })
+  };
+
+  $scope.utterBorderState = function () {
+    $scope.showBorderState = true;
+    $ionicPlatform.ready(function() {
+      TTS.speak({
+          text: $scope.state.name + ' borders ' + $scope.state.borderState,
+          locale: 'en-US',
+          rate: 1.3
+        },
+        function () {},
+        function (reason) {}
+      )
+    })
+  };
+
 })
 
 .controller('TrekCtrl', function($scope, $stateParams, $ionicLoading, $http, States, GeoLocation, SessionService) {
