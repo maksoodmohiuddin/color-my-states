@@ -165,7 +165,7 @@ angular.module('colorMyStates.controllers', [])
 
   $scope.soundOn = function () {
     $scope.playSound = true;
-    $scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
+    //$scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
     $scope.audio.loop = true;
     $scope.audio.play();
   };
@@ -199,7 +199,7 @@ angular.module('colorMyStates.controllers', [])
   // 5 seconds delay
   $timeout( function(){
     $scope.showArrow = true;
-  }, 60000 );
+  }, 30000 );
 
 })
 
@@ -266,7 +266,7 @@ $scope.states = States.all();
 
   var init = function () {
     //var visited = SessionService.get('visited');
-
+    $scope.states = States.all();
     $scope.visitedStates = States.visited();
 
     if ($scope.visitedStates !== null) {

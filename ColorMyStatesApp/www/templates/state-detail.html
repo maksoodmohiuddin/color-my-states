@@ -5,36 +5,49 @@
   The States service returns an array of state data
 -->
 <ion-view view-title="{{state.name}}">
+  <ion-nav-bar class="bar-positive">
+  </ion-nav-bar>
+
   <ion-content class="padding">
-    <img ng-src="{{state.map}}" style="width: 100px; height: 100px">
 
     <p>
-      <button class="button icon-right ion-bowtie button-calm" name="paw" ng-click="utterCapital()">Capital</button>
-      <div class="card" ng-show="showCapital">
-        <div class="item item-text-wrap">
-          {{state.capital}}
+      <div class="animated fadeInDown">
+        <img ng-src="{{state.map}}" style="width: 100px; height: 100px">
+      </div>
+    </p>
+
+    <p>
+      <div class="animated fadeInLeft">
+        <button class="button icon-right ion-bowtie button-assertive" name="paw" ng-click="utterCapital()">Capital</button>
+        <div class="card animated fadeInLeft" ng-show="showCapital">
+          <div class="item item-text-wrap">
+            {{state.capital}}
+          </div>
         </div>
       </div>
     </p>
 
     <p>
-      <button class="button icon-right ion-bonfire button-energized" ng-click="utterNickName()">Nick Name</button>
-      <div class="card" ng-show="showNickName">
-        <div class="item item-text-wrap">
-          {{state.nickName}}
+      <div class="animated fadeInRight">
+        <button class="button icon-right ion-bonfire button-energized" ng-click="utterNickName()">Nick Name</button>
+        <div class="card animated fadeInRight" ng-show="showNickName">
+          <div class="item item-text-wrap">
+            {{state.nickName}}
+          </div>
         </div>
       </div>
     </p>
 
     <p>
-      <button class="button icon-right ion-android-car button-royal" ng-click="utterBorderState()">Border States</button>
-      <div class="card" ng-show="showBorderState">
-        <div class="item item-text-wrap">
-          {{state.borderState}}
+      <div class="animated fadeInUp">
+        <button class="button icon-right ion-android-car button-royal" ng-click="utterBorderState()">Border States</button>
+        <div class="card animated fadeInUp" ng-show="showBorderState">
+          <div class="item item-text-wrap">
+            {{state.borderState}}
+          </div>
         </div>
       </div>
     </p>
-
 
   </ion-content>
 </ion-view>

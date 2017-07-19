@@ -1,7 +1,12 @@
-<ion-view view-title="Color the map of {{state.name}}!">
+<ion-view view-title="Color {{state.name}}!">
+  <ion-nav-bar class="bar-energized">
+  </ion-nav-bar>
+
 
   <ion-content scroll="false">
-    <canvas id="c"></canvas>
+    <div class="list card animated bounce">
+      <canvas id="c"></canvas>
+    </div>
   </ion-content>
 
   <ion-footer-bar class="bar-stable">

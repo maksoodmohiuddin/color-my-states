@@ -1,11 +1,15 @@
 <ion-view view-title="Learn About Your States">
+  <ion-nav-bar class="bar-dark">
+  </ion-nav-bar>
   <ion-content>
       <ion-list>
-        <ion-item class="item-remove-animate item-avatar item-icon-right classA" ng-repeat="state in states" type="item-text-wrap" href="#/tab/states/{{state.id}}">
-          <img ng-src="{{state.map}}">
-          <h2>{{state.name}}</h2>
-          <p>{{state.nickName}}</p>
-          <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-item class="item-remove-animate item-avatar item-icon-right classA animated pulse" ng-repeat="state in states" type="item-text-wrap" href="#/tab/states/{{state.id}}">
+
+            <img ng-src="{{state.map}}">
+            <h2>{{state.name}}</h2>
+            <p>{{state.nickName}}</p>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+
         </ion-item>
       </ion-list>
   </ion-content>

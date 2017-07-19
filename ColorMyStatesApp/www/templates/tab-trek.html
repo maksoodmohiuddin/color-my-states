@@ -1,17 +1,24 @@
 <ion-view view-title="States You Have Trekked!">
+  <ion-nav-bar class="bar-balanced">
+  </ion-nav-bar>
+
   <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right classA" ng-repeat="state in states">
+        <div class="list card animated shake">
+          <img ng-src="{{state.map}}">
+          <h2>{{state.name}}</h2>
+        </div>
+      </ion-item>
+    </ion-list>
+
     <div class="card">
-      <div class="item item-text-wrap item-divider">
-        {{visitedStatedName}}
-      </div>
-      <div class="item item-text-wrap">
-        <img ng-src="img/usa.jpg" style="width: 100%; height: 100%">
-      </div>
       <div class="item item-divider">
         <button class="button button-icon ion-location" ng-click="GetGeoLocation()"> Where Am I Now?</button>
         <button class="button button-icon ion-ios-trash" ng-click="ClearTrek()"> Clear Trekked</button>
       </div>
     </div>
+
   </ion-content>
 </ion-view>
 
