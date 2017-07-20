@@ -1,24 +1,20 @@
-<ion-view view-title="States You Have Trekked!">
-  <ion-nav-bar class="bar-balanced">
+<ion-view view-title="States Colored!">
+  <ion-nav-bar class="bar-energized">
   </ion-nav-bar>
 
-  <ion-content>
+  <ion-content class="has-footer">
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right classA" ng-repeat="state in states">
-        <div class="list card animated shake">
-          <img ng-src="{{state.map}}">
-          <h2>{{state.name}}</h2>
-        </div>
+      <ion-item ng-repeat="state in visitedStates" class="animated tada">
+        <img ng-src="{{state.map}}">
+        <h2>{{state.name}}</h2>
       </ion-item>
     </ion-list>
-
-    <div class="card">
-      <div class="item item-divider">
-        <button class="button button-icon ion-location" ng-click="GetGeoLocation()"> Where Am I Now?</button>
-        <button class="button button-icon ion-ios-trash" ng-click="ClearTrek()"> Clear Trekked</button>
-      </div>
-    </div>
-
   </ion-content>
+
+  <ion-footer-bar class="bar-energized"> 
+    <div class="title"> 
+      <button class="button button-icon ion-ios-trash" ng-click="clearTrek()"></button> 
+     </div>
+  </ion-footer-bar>
 </ion-view>
 

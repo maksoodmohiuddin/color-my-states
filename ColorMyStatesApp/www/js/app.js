@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'colorMyStates.services' is found in services.js
 // 'colorMyStates.controllers' is found in controllers.js
-angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyStates.services'])
+angular.module('colorMyStates', ['ionic', 'ngCordova', 'colorMyStates.controllers', 'colorMyStates.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaNativeAudio) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,6 +20,18 @@ angular.module('colorMyStates', ['ionic', 'colorMyStates.controllers', 'colorMyS
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $ionicPlatform.ready(function() {
+      $cordovaNativeAudio
+        .preloadComplex('music', 'audio/ColorMyStatesSoundTrack.m4a', 1, 1, 5)
+        .then(function (msg) {
+          $cordovaNativeAudio.play('music');
+          console.log(msg);
+        }, function (error) {
+          console.error(error);
+        });
+    });
+
   });
 })
 

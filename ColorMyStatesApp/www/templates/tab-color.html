@@ -1,23 +1,23 @@
 <ion-view view-title="Color {{state.name}}!">
-  <ion-nav-bar class="bar-energized">
+  <ion-nav-bar class="bar-dark">
+    <button class="button button-clear" style="color: {{brushcolor}}" ng-click="addText()">Aa</button> 
   </ion-nav-bar>
 
-
-  <ion-content scroll="false">
+  <ion-content scroll="false" class="has-footer" >
     <div class="list card animated bounce">
       <canvas id="c"></canvas>
     </div>
   </ion-content>
 
-  <ion-footer-bar class="bar-stable">
-    <div class="title">
-      <button class="button button-clear" style="color: {{brushcolor}}" ng-click="addText()">Aa</button>
-      <button class="button button-icon ion-paintbrush" ng-click="drawingMode()"></button>
-      <button class="button button-icon ion-android-color-palette" style="color: {{brushcolor}}" ng-if="showColorPaletteIcon" ng-click="openColorsPopover($event)"></button>
-      <button class="button button-icon ion-ios-undo" ng-click="undoLastObject()"></button>
-      <button class="button button-icon ion-ios-arrow-forward" ng-show= 'showArrow' ng-click="closeColoring()"></button>
-    </div>
+  <ion-footer-bar class="bar-dark"> 
+    <div class="title"> 
+      <button class="button button-clear" style="color: {{brushcolor}}" ng-click="addText()">Aa</button> 
+      <button class="button button-icon ion-paintbrush" ng-click="drawingMode()"></button> 
+      <button class="button button-icon ion-android-color-palette" style="color: {{brushcolor}}" ng-if="showColorPaletteIcon" ng-click="openColorsPopover($event)"></button> 
+      <button class="button button-icon ion-ios-undo" ng-click="undoLastObject()"></button>     <button class="button button-icon ion-volume-mute" ng-if="showStop" ng-click="stop()"></button> 
+  </div> 
   </ion-footer-bar>
+
 </ion-view>
 
 

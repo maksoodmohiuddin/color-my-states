@@ -577,6 +577,14 @@ angular.module('colorMyStates.services', [])
         }
       }
       return null;
+    },
+    getByName: function(stateName) {
+      for (var i = 0; i < states.length; i++) {
+        if (states[i].name === parseInt(stateName)) {
+          return states[i];
+        }
+      }
+      return null;
     }
   };
 })

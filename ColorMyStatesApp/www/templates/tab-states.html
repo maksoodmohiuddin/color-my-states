@@ -1,17 +1,22 @@
 <ion-view view-title="Learn About Your States">
-  <ion-nav-bar class="bar-dark">
+  <ion-nav-bar class="bar-balanced">
   </ion-nav-bar>
-  <ion-content>
+
+  <ion-content class="has-footer">
       <ion-list>
         <ion-item class="item-remove-animate item-avatar item-icon-right classA animated pulse" ng-repeat="state in states" type="item-text-wrap" href="#/tab/states/{{state.id}}">
-
             <img ng-src="{{state.map}}">
             <h2>{{state.name}}</h2>
             <p>{{state.nickName}}</p>
             <i class="icon ion-chevron-right icon-accessory"></i>
-
         </ion-item>
       </ion-list>
   </ion-content>
+
+  <ion-footer-bar class="bar-balanced"> 
+    <div class="title"> 
+      <button class="button button-icon ion-location" ng-click="openLocationPopover($event)"></button> 
+    </div>
+  </ion-footer-bar>
 </ion-view>
 

@@ -1,9 +1,12 @@
 angular.module('colorMyStates.controllers', [])
 
-.controller('ColorCtrl', function($scope, $ionicLoading, $ionicPlatform, $http, $state, $ionicPopover, $ionicPopup, $timeout, States, SessionService) {
+.controller('ColorCtrl', function($scope, $ionicLoading, $ionicPlatform, $http, $state, $ionicPopover, $ionicPopup, $timeout, $cordovaNativeAudio, States, SessionService) {
 
   var width = window.innerWidth; // width of canvas
-  var height = width * (4 / 3) // height of canvas
+  //alert(width);
+  //var height = (width * (4 / 3)); // height of canvas
+  var height = window.innerHeight * (3.0/4.0);
+  //alert(height);
 
   var canvas = new fabric.Canvas('c');
 
@@ -151,59 +154,16 @@ angular.module('colorMyStates.controllers', [])
 
   }
 
-
-  //$scope.playSoundTrack = function() {
-  //  $scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
-  //  $scope.audio.loop = true;
-  //  $scope.soundOn();
-  //};
-
-  $scope.closeColoring = function() {
-    $scope.soundOff();
-    $state.go("tab.state-detail", { "stateId": $scope.state.id});
+  $scope.showStop = true;
+  $scope.stop = function () {
+    $cordovaNativeAudio.stop('music');
+    $cordovaNativeAudio.unload('music');
+    $scope.showStop = false;
   };
-
-  $scope.soundOn = function () {
-    $scope.playSound = true;
-    //$scope.audio = new Audio('audio/ColorMyStatesSoundTrack.m4a');
-    $scope.audio.loop = true;
-    $scope.audio.play();
-  };
-
-  $scope.soundOff = function () {
-    $scope.playSound = false;
-    $scope.audio.pause();
-  };
-
-  $ionicPlatform.ready(function() {
-    // 5 seconds delay
-    $timeout( function(){
-      TTS.speak({
-          text: 'Howdy Ranger! Welcome to ' + $scope.state.name + '. Lets color it!',
-          locale: 'en-US',
-          rate: 1.3
-        },
-        function () {},
-        function (reason) {}
-      );
-    }, 2000 );
-
-  });
-
-  // 5 seconds delay
-  $timeout( function(){
-    $scope.soundOn();
-  }, 5000 );
-
-  $scope.showArrow = false;
-  // 5 seconds delay
-  $timeout( function(){
-    $scope.showArrow = true;
-  }, 30000 );
 
 })
 
-.controller('StatesCtrl', function($scope, $ionicPlatform, States) {
+.controller('StatesCtrl', function($scope, $ionicPlatform, $ionicPopover, $http, GeoLocation, States) {
 // With the new view caching in Ionic, Controllers are only called
 // when they are recreated or on app start, instead of every page change.
 // To listen for when this page is active (for example, to refresh data),
@@ -213,6 +173,60 @@ angular.module('colorMyStates.controllers', [])
 //});
 
 $scope.states = States.all();
+
+// geo location options popover
+$ionicPopover.fromTemplateUrl('templates/popup-geolocation.html', {
+  scope: $scope
+}).then(function(popover) {
+  $scope.popover = popover;
+});
+
+var ReverseGeoCoding = function () {
+
+  var googleMapsReverseGeoCodingAPI = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + $scope.latitude + ',' + $scope.longitude + '&key=AIzaSyASXfyZ4bfzlrx9aPRa3Nupqiw4DnQBy8I';
+
+  $http.get(googleMapsReverseGeoCodingAPI)
+    .success(function (response) {
+      //var location = "Howdy Ranger! You are at : " + response.results[0].formatted_address;
+      $scope.geoLocationMessage = response.results[0].address_components[5].long_name;
+      alert($scope.geoLocationMessage);
+      $scope.state = States.getByName($scope.geoLocationMessage);
+
+    })
+    .error(function (data, status, headers, config) {
+      console.log('Cannot obtain current location', reason);
+      $scope.geoLocationMessage = 'Nice playing hide-and-seek, we can not find you.';
+    });
+};
+
+$scope.getGeoLocation = function () {
+
+  GeoLocation.getCurrentPosition()
+    .then(
+      // success
+      function (position) {
+
+        $scope.latitude = parseFloat(position.coords.latitude);
+        $scope.longitude = parseFloat(position.coords.longitude);
+        ReverseGeoCoding();
+      },
+      // failure
+      function (reason) {
+        console.log('Cannot obtain current location', reason);
+
+        $scope.geoLocationMessage = 'Nice playing hide-and-seek, we can not find you.';
+      });
+};
+
+$scope.openLocationPopover = function($event) {
+  $scope.getGeoLocation();
+  $scope.popover.show($event);
+};
+
+$scope.closeLocationPopover = function() {
+  $scope.popover.hide();
+};
+
 })
 
 .controller('StateDetailCtrl', function($scope, $stateParams, $ionicPlatform, States) {
@@ -223,8 +237,8 @@ $scope.states = States.all();
     $ionicPlatform.ready(function() {
         TTS.speak({
             text: 'Capital of ' + $scope.state.name + ' is ' + $scope.state.capital,
-            locale: 'en-US',
-            rate: 1.3
+            locale: 'en-UK',
+            rate: 1.5
           },
           function () {},
           function (reason) {}
@@ -237,7 +251,7 @@ $scope.states = States.all();
     $ionicPlatform.ready(function() {
       TTS.speak({
           text: $scope.state.name + ' also known as ' + $scope.state.nickName,
-          locale: 'en-US',
+          locale: 'en-CA',
           rate: 1.3
         },
         function () {},
@@ -262,83 +276,13 @@ $scope.states = States.all();
 
 })
 
-.controller('TrekCtrl', function($scope, $stateParams, $ionicLoading, $http, States, GeoLocation, SessionService) {
+.controller('TrekCtrl', function($scope, $stateParams, $http, $ionicPopover, States,SessionService) {
 
   var init = function () {
-    //var visited = SessionService.get('visited');
-    $scope.states = States.all();
     $scope.visitedStates = States.visited();
-
-    if ($scope.visitedStates !== null) {
-      $scope.visitedStatedName = " ";
-
-      for (var key in $scope.visitedStates) {
-        // skip loop if the property is from prototype
-        if (!$scope.visitedStates.hasOwnProperty(key)) continue;
-
-        var state = $scope.visitedStates[key];
-        $scope.visitedStatedName += state.name + ' | ';
-      }
-    }
-
   };
 
-  var ReverseGeoCoding = function () {
-
-    var googleMapsReverseGeoCodingAPI = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + $scope.latitude + ',' + $scope.longitude + '&key=AIzaSyASXfyZ4bfzlrx9aPRa3Nupqiw4DnQBy8I';
-
-    $http.get(googleMapsReverseGeoCodingAPI)
-      .success(function (response) {
-        //var location = "Howdy Ranger! You are at : " + response.results[0].formatted_address;
-        var location = "Howdy Ranger! You are at : " + response.results[0].address_components[5].long_name;
-
-        $ionicLoading.show({
-          template: location,
-          duration: 1500
-        });
-      })
-      .error(function (data, status, headers, config) {
-        console.log('Cannot obtain current location', reason);
-
-        $ionicLoading.show({
-          template: 'Nice  playing hide-and-seek, we can not find you.',
-          duration: 1000
-        });
-
-        if (status == 0)
-          console.log("Error", "Error occured from calling Google Maps API");
-        else
-          console.log("Error", data);
-      });
-  };
-
-  $scope.GetGeoLocation = function () {
-
-    GeoLocation.getCurrentPosition()
-      .then(
-        // success
-        function (position) {
-          console.log('Current location found');
-          console.log('Current location Latitude: ' + position.coords.latitude);
-          console.log('Current location Longitude: ' + position.coords.longitude);
-
-          //$ionicLoading.hide();
-          $scope.latitude = parseFloat(position.coords.latitude);
-          $scope.longitude = parseFloat(position.coords.longitude);
-          ReverseGeoCoding();
-        },
-        // failure
-        function (reason) {
-          console.log('Cannot obtain current location', reason);
-
-          $ionicLoading.show({
-            template: 'Nice playing hide-and-seek, we can not find you.',
-            duration: 2000
-          });
-        });
-  };
-
-  $scope.ClearTrek = function () {
+  $scope.clearTrek = function () {
     SessionService.destroy('visited');
     // set California as a default state
     var visitedStatesNew = [];
