@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ionicframework.colormystatesapp140690" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.maksoodmohiuddin.colormystates" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ColorMyStates</name>
     <description>An interactive educational mobile app for kids to learn geography</description>
     <author email="maksood@gmail.com" href="http://maksoodmohiuddin.com/">Maksood Mohiuddin</author>
