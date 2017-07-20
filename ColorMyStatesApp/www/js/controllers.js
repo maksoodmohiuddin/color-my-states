@@ -2,11 +2,8 @@ angular.module('colorMyStates.controllers', [])
 
 .controller('ColorCtrl', function($scope, $ionicLoading, $ionicPlatform, $http, $state, $ionicPopover, $ionicPopup, $timeout, $cordovaNativeAudio, States, SessionService) {
 
-  var width = window.innerWidth; // width of canvas
-  //alert(width);
-  //var height = (width * (4 / 3)); // height of canvas
+  var width = window.innerWidth; // * (3.0/4.0);
   var height = window.innerHeight * (3.0/4.0);
-  //alert(height);
 
   var canvas = new fabric.Canvas('c');
 
@@ -22,7 +19,7 @@ angular.module('colorMyStates.controllers', [])
   canvas.height = height;
 
   canvas.isDrawingMode = false;
-  canvas.freeDrawingBrush.width = 7; // size of the drawing brush
+  canvas.freeDrawingBrush.width = 14; // size of the drawing brush
   $scope.brushcolor = 'rgba(255, 0, 0, 0.5)'; // set brushcolor to red to begin
   canvas.freeDrawingBrush.color = 'rgba(255, 0, 0, 0.5)';
 
@@ -187,15 +184,12 @@ var ReverseGeoCoding = function () {
 
   $http.get(googleMapsReverseGeoCodingAPI)
     .success(function (response) {
-      //var location = "Howdy Ranger! You are at : " + response.results[0].formatted_address;
-      $scope.geoLocationMessage = response.results[0].address_components[5].long_name;
-      alert($scope.geoLocationMessage);
-      $scope.state = States.getByName($scope.geoLocationMessage);
-
+      $scope.location = response.results[0].address_components[5].long_name;
+      $scope.geoMessage= 'Thanks for playing hide-and-seek but the app found you in ' + $scope.location + '!';
     })
     .error(function (data, status, headers, config) {
       console.log('Cannot obtain current location', reason);
-      $scope.geoLocationMessage = 'Nice playing hide-and-seek, we can not find you.';
+      $scope.geoMessage= 'Thanks for playing hide-and-seek but the app can not find you!';
     });
 };
 
@@ -214,7 +208,7 @@ $scope.getGeoLocation = function () {
       function (reason) {
         console.log('Cannot obtain current location', reason);
 
-        $scope.geoLocationMessage = 'Nice playing hide-and-seek, we can not find you.';
+        $scope.geoMessage = 'Thanks for playing hide-and-seek but the app can not find you!';
       });
 };
 
@@ -289,6 +283,21 @@ $scope.closeLocationPopover = function() {
     visitedStatesNew.push(5);
     SessionService.set('visited', visitedStatesNew);
     init();
+  };
+
+  // geo location options popover
+  $ionicPopover.fromTemplateUrl('templates/popup-info.html', {
+    scope: $scope
+  }).then(function(popover) {
+    $scope.popover = popover;
+  });
+
+  $scope.openInfoPopover = function($event) {
+    $scope.popover.show($event);
+  };
+
+  $scope.closeInfoPopover = function() {
+    $scope.popover.hide();
   };
 
   init();

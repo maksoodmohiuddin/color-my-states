@@ -25,7 +25,7 @@ angular.module('colorMyStates', ['ionic', 'ngCordova', 'colorMyStates.controller
       $cordovaNativeAudio
         .preloadComplex('music', 'audio/ColorMyStatesSoundTrack.m4a', 1, 1, 5)
         .then(function (msg) {
-          $cordovaNativeAudio.play('music');
+          $cordovaNativeAudio.loop('music');
           console.log(msg);
         }, function (error) {
           console.error(error);
