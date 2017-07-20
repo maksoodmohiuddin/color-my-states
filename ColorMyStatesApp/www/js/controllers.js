@@ -185,10 +185,9 @@ var ReverseGeoCoding = function () {
   $http.get(googleMapsReverseGeoCodingAPI)
     .success(function (response) {
       $scope.location = response.results[0].address_components[5].long_name;
-      $scope.geoMessage= 'Thanks for playing hide-and-seek but the app found you in ' + $scope.location + '!';
+      $scope.geoMessage= 'Thanks for playing hide-and-seek, the app found you in ' + $scope.location + '!  No worries, the app does not collect or share your location.';
     })
     .error(function (data, status, headers, config) {
-      console.log('Cannot obtain current location', reason);
       $scope.geoMessage= 'Thanks for playing hide-and-seek but the app can not find you!';
     });
 };
@@ -206,8 +205,6 @@ $scope.getGeoLocation = function () {
       },
       // failure
       function (reason) {
-        console.log('Cannot obtain current location', reason);
-
         $scope.geoMessage = 'Thanks for playing hide-and-seek but the app can not find you!';
       });
 };

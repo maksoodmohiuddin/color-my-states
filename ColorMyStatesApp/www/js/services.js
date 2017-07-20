@@ -54,7 +54,7 @@ angular.module('colorMyStates.services', [])
     nickName: 'The Golden State',
     stateHood: 'September 9, 1850 - 31st State',
     stateArea: '163,707 Square Miles - 3rd largest',
-    borderState: 'Arizona, Nevada and Oregon',
+    borderState: 'Arizona | Nevada | Oregon',
     highestPoint: 'Mt. Whitney - 14,494 feet - 2nd tallest',
     visited: false,
     map: 'img/california.gif'
@@ -79,7 +79,7 @@ angular.module('colorMyStates.services', [])
     borderState: 'Massachusetts | New York | Rhode Island',
     highestPoint: 'Mt. Frissell - 2,380 feet -  36th tallest',
     visited: false,
-    map: 'img/Connecticut.gif'
+    map: 'img/connecticut.gif'
   },{
     id: 8,
     name: 'Delaware',
@@ -150,7 +150,7 @@ angular.module('colorMyStates.services', [])
     id: 14,
     name: 'Indiana',
     capital: 'Indianapolis',
-    nickName: 'The Last Fro',
+    nickName: 'The Hoosier State',
     stateHood: 'December 11,1816 - 19th State',
     stateArea: '36,420 Square Miles - 38th largest',
     borderState: 'Illinois | Kentucky | Michigan | Ohio',
@@ -271,7 +271,7 @@ angular.module('colorMyStates.services', [])
     id: 25,
     name: 'Missouri',
     capital: 'Jefferson City',
-    nickName: 'The Shoe Me State',
+    nickName: 'The Show Me State',
     stateHood: 'August 10, 1821 - 24th State',
     stateArea: '69,709 Square Miles - 21st largest',
     borderState: 'Arkansas | Illinois | Iowa | Kansas | Kentucky | Nebraska | Oklahoma | Tennessee',
@@ -469,7 +469,7 @@ angular.module('colorMyStates.services', [])
     id: 43,
     name: 'Texas',
     capital: 'Austin',
-    nickName: 'The Lonestate State',
+    nickName: 'The Lone Star State',
     stateHood: 'December 29, 1845 - 28th State',
     stateArea: '268,601 Square Miles - 2nd largest',
     borderState: 'Arkansas | Louisiana | New Mexico | Oklahoma',
